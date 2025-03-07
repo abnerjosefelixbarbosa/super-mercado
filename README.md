@@ -2,7 +2,7 @@
 
 ## Sobre
 
-Sistem de automação de compras.
+Sistema de automação de compras.
 
 ## Modelo
 
