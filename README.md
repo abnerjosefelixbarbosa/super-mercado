@@ -22,7 +22,7 @@ classDiagram
         - String barcode
         - String description
         - BigDecimal price
-        - BuyProduct[] buyProduct 
+        - BuyProduct[] buyProducts 
     }
     
     class BuyProduct {
@@ -39,5 +39,5 @@ classDiagram
     
     Buy "1" -- "*" BuyProduct
     Product "1" -- "*" BuyProduct
-    BuyProductId  -- BuyProduct 
+    BuyProductId  -- BuyProducts 
 ```
