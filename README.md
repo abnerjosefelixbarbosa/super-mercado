@@ -14,7 +14,7 @@ classDiagram
         - LocalTime time
         - String customerDocument
         - BigDecimal value
-        - BuyProduct[] buyProduct 
+        - BuyProduct[] buyProducts 
     }
     
     class Product {
@@ -22,7 +22,7 @@ classDiagram
         - String barcode
         - String description
         - BigDecimal price
-        - BuyProduct[] buyProduct 
+        - BuyProduct[] buyProducts 
     }
     
     class BuyProduct {
