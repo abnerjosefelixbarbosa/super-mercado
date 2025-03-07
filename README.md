@@ -4,7 +4,7 @@
 
 Super Mercado
 
-## modelo
+## Modelo
 
 ```mermaid
 classDiagram
