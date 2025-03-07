@@ -14,7 +14,7 @@ classDiagram
         - LocalTime time
         - String customerDocument
         - BigDecimal value
-        - BuyProduct[] buyProduct 
+        - BuyProduct[] buyProducts 
     }
     
     class Product {
@@ -39,5 +39,5 @@ classDiagram
     
     Buy "1" -- "*" BuyProduct
     Product "1" -- "*" BuyProduct
-    BuyProductId  -- BuyProducts 
+    BuyProductId  -- BuyProduct 
 ```
