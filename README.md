@@ -1,8 +1,8 @@
-# super-mercado
+# Super Mercado
 
 ## Sobre
 
-Super Mercado
+Sistem de automação de compras.
 
 ## Modelo
 
