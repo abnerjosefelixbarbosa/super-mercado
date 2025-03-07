@@ -1,5 +1,6 @@
 package com.super_mercado.backend.entities;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -21,7 +22,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "buys")
-public class Buy {
+public class Buy implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	private String id;
 	@Column(name = "buy_date", nullable = true)
