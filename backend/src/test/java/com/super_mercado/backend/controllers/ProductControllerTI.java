@@ -1,6 +1,8 @@
 package com.super_mercado.backend.controllers;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import java.math.BigDecimal;
@@ -32,6 +34,7 @@ class ProductControllerTI {
 	private ObjectMapper objectMapper;
 	@Autowired
 	private ProductRepository productRepository;
+	private String id;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -47,7 +50,7 @@ class ProductControllerTI {
 	void sholdRegisterProductAndReturn201() throws Exception {
 		load();
 		ProductRequestDTO dto = new ProductRequestDTO();
-		dto.setBarcode("1");
+		dto.setBarcode("2");
 		dto.setDescription("descrição1");
 		dto.setPrice(BigDecimal.valueOf(9.90));
 		String json = objectMapper.writeValueAsString(dto);
@@ -57,11 +60,22 @@ class ProductControllerTI {
 
 	@Test
 	void sholdUpdateProductByIdAndReturn200() throws Exception {
-		//
+		load();
+		ProductRequestDTO dto = new ProductRequestDTO();
+		dto.setBarcode("2");
+		dto.setDescription("descrição1");
+		dto.setPrice(BigDecimal.valueOf(9.90));
+		String json = objectMapper.writeValueAsString(dto);
+		mockMvc.perform(put("/api/v1/products/update-product-by-id").queryParam("id", id)
+				.contentType(MediaType.APPLICATION_JSON).content(json)).andExpect(MockMvcResultMatchers.status().isOk())
+				.andDo(print());
 	}
 
 	@Test
 	void sholdListProductsAndReturn200() throws Exception {
+		load();
+		mockMvc.perform(get("/api/v1/products/list-products")).andExpect(MockMvcResultMatchers.status().isOk())
+				.andDo(print());
 	}
 
 	void load() {
@@ -70,7 +84,7 @@ class ProductControllerTI {
 		product1.setBarcode("1");
 		product1.setDescription("descrição1");
 		product1.setPrice(BigDecimal.valueOf(9.90));
-		
 		productRepository.save(product1);
+		id = product1.getId();
 	}
 }

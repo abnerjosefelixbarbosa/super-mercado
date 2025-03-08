@@ -37,9 +37,11 @@ public class ProductServiceImpl implements ProductService {
 	@Transactional
 	public ProdutcResponseDTO updateProductById(String id, ProductRequestDTO dto) {
 		Product product = productMapper.toProdut(dto);
+		productValidation.validateProduct(product);
 		Product productFound = productRepository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("ID não encontrado."));
 		BeanUtils.copyProperties(product, productFound);
+		productFound.setId(id);
 		Product productSaved = productRepository.save(productFound);
 		return productMapper.toProdutcResponseDTO(productSaved);
 	}
