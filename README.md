@@ -1,4 +1,4 @@
-# Super Mercado
+# Super Mercado [![maven](https://github.com/abnerjosefelixbarbosa/super-mercado/actions/workflows/maven.yml/badge.svg)](https://github.com/abnerjosefelixbarbosa/super-mercado/actions/workflows/maven.yml)
 
 ## Sobre
 
