@@ -1,4 +1,4 @@
-# Super Mercado ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/abnerjosefelixbarbosa/super-mercado/maven?branch=main)
+# Super Mercado
 
 
 ## Sobre
