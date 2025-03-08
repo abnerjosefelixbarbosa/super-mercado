@@ -7,5 +7,5 @@ import com.super_mercado.backend.entities.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, String> {
-
+	boolean existsByBarcode(String barcode);
 }
