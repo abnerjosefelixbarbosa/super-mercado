@@ -17,8 +17,6 @@ public class ProductValidationImpl implements ProductValidation {
 		
 		if (isBarcodeExists)
 			throw new RuntimeException("Codigo de barra não deve ser repetido.");
-		if (product.getPrice().precision() > 10)
-			throw new RuntimeException("Preço deve ter até 10 dígitos de precisão.");
 		if (product.getPrice().precision() != 2)
 			throw new RuntimeException("Preço deve ter 2 dígitos de escala.");	
 	}

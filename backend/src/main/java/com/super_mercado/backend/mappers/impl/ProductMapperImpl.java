@@ -1,5 +1,7 @@
 package com.super_mercado.backend.mappers.impl;
 
+import java.util.UUID;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,7 @@ import com.super_mercado.backend.mappers.ProductMapper;
 public class ProductMapperImpl implements ProductMapper {
 	public Product toProdut(ProductRequestDTO dto) {
 		Product product = new Product();
+		product.setId(UUID.randomUUID().toString());
 		BeanUtils.copyProperties(dto, product);
 		return product;
 	}

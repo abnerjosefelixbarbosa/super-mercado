@@ -31,6 +31,16 @@ public class ExcepitionController {
 		return errors;
 	}
 	
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<ExceptionResponseDTO> handleException(Exception e, HttpServletRequest request) {
+		ExceptionResponseDTO dto = new ExceptionResponseDTO();
+		dto.setLocalDateTime(LocalDateTime.now());
+		dto.setMessage(e.getMessage());
+		dto.setPath(request.getRequestURI());
+		dto.setStatus(500);
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(dto);
+	}
+	
 	@ExceptionHandler(RuntimeException.class)
 	public ResponseEntity<ExceptionResponseDTO> handleRuntimeException(RuntimeException e, HttpServletRequest request) {
 		ExceptionResponseDTO dto = new ExceptionResponseDTO();
