@@ -47,7 +47,7 @@ class ProductControllerTI {
 	void sholdRegisterProductAndReturn201() throws Exception {
 		load();
 		ProductRequestDTO dto = new ProductRequestDTO();
-		dto.setBarcode("2");
+		dto.setBarcode("1");
 		dto.setDescription("descrição1");
 		dto.setPrice(BigDecimal.valueOf(9.90));
 		String json = objectMapper.writeValueAsString(dto);
