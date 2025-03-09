@@ -12,9 +12,16 @@ import com.super_mercado.backend.mappers.ProductMapper;
 
 @Component
 public class ProductMapperImpl implements ProductMapper {
-	public Product toProdut(ProductRequestDTO dto) {
+	public Product toProduct(ProductRequestDTO dto) {
 		Product product = new Product();
 		product.setId(UUID.randomUUID().toString());
+		BeanUtils.copyProperties(dto, product);
+		return product;
+	}
+	
+	public Product toProduct(String id, ProductRequestDTO dto) {
+		Product product = new Product();
+		product.setId(id);
 		BeanUtils.copyProperties(dto, product);
 		return product;
 	}

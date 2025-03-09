@@ -4,4 +4,5 @@ import com.super_mercado.backend.entities.Product;
 
 public interface ProductValidation {
 	void validateProduct(Product product);
+	void validateProduct(String id, Product product);
 }

@@ -5,6 +5,7 @@ import com.super_mercado.backend.dtos.responses.ProdutcResponseDTO;
 import com.super_mercado.backend.entities.Product;
 
 public interface ProductMapper {
-	Product toProdut(ProductRequestDTO dto);
+	Product toProduct(ProductRequestDTO dto);
+	Product toProduct(String id, ProductRequestDTO dto);
 	ProdutcResponseDTO toProdutcResponseDTO(Product product);
 }
