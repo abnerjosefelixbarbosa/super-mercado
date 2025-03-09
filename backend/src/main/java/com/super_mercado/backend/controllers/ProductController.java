@@ -27,16 +27,19 @@ public class ProductController {
 
 	@PostMapping(value = "/register-product")
 	public ResponseEntity<ProdutcResponseDTO> registerProduct(@Valid @RequestBody ProductRequestDTO dto) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(productService.registerProduct(dto));
+		ProdutcResponseDTO produtcResponseDTO = productService.registerProduct(dto);
+		return ResponseEntity.status(HttpStatus.CREATED).body(produtcResponseDTO);
 	}
 	
 	@PutMapping(value = "/update-product-by-id")
 	public ResponseEntity<ProdutcResponseDTO> updateProductById(@RequestParam String id, @Valid @RequestBody ProductRequestDTO dto) {
-		return ResponseEntity.status(HttpStatus.OK).body(productService.updateProductById(id, dto));
+		ProdutcResponseDTO produtcResponseDTO = productService.updateProductById(id, dto);
+		return ResponseEntity.status(HttpStatus.OK).body(produtcResponseDTO);
 	}
 
 	@GetMapping(value = "/list-products")
 	public ResponseEntity<Page<ProdutcResponseDTO>> listProducts(Pageable pageable) {
-		return ResponseEntity.status(HttpStatus.OK).body(productService.listProducts(pageable));
+		Page<ProdutcResponseDTO> page = productService.listProducts(pageable);
+		return ResponseEntity.status(HttpStatus.OK).body(page);
 	}
 }

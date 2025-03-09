@@ -31,7 +31,8 @@ public class ProductServiceImpl implements ProductService {
 		Product product = productMapper.toProduct(dto);
 		productValidation.validateProduct(product);
 		Product productSaved = productRepository.save(product);
-		return productMapper.toProdutcResponseDTO(productSaved);
+		ProdutcResponseDTO produtcResponseDTO = productMapper.toProdutcResponseDTO(productSaved);
+		return produtcResponseDTO;
 	}
 
 	@Transactional
@@ -42,10 +43,12 @@ public class ProductServiceImpl implements ProductService {
 				.orElseThrow(() -> new EntityNotFoundException("ID não encontrado."));
 		BeanUtils.copyProperties(product, productFound);
 		Product productSaved = productRepository.save(productFound);
-		return productMapper.toProdutcResponseDTO(productSaved);
+		ProdutcResponseDTO produtcResponseDTO = productMapper.toProdutcResponseDTO(productSaved);
+		return produtcResponseDTO;
 	}
 
 	public Page<ProdutcResponseDTO> listProducts(Pageable pageable) {
-		return productRepository.findAll(pageable).map(productMapper::toProdutcResponseDTO);
+		Page<Product> page = productRepository.findAll(pageable);
+		return page.map(productMapper::toProdutcResponseDTO);
 	}
 }
