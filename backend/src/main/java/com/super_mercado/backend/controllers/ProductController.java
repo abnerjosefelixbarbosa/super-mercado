@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.super_mercado.backend.dtos.requests.ProductRequestDTO;
-import com.super_mercado.backend.dtos.responses.ProdutcResponseDTO;
+import com.super_mercado.backend.dtos.responses.ProductResponseDTO;
 import com.super_mercado.backend.services.ProductService;
 
 import jakarta.validation.Valid;
@@ -26,20 +26,20 @@ public class ProductController {
 	private ProductService productService;
 
 	@PostMapping(value = "/register-product")
-	public ResponseEntity<ProdutcResponseDTO> registerProduct(@Valid @RequestBody ProductRequestDTO dto) {
-		ProdutcResponseDTO produtcResponseDTO = productService.registerProduct(dto);
+	public ResponseEntity<ProductResponseDTO> registerProduct(@Valid @RequestBody ProductRequestDTO dto) {
+		ProductResponseDTO produtcResponseDTO = productService.registerProduct(dto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(produtcResponseDTO);
 	}
 	
 	@PutMapping(value = "/update-product-by-id")
-	public ResponseEntity<ProdutcResponseDTO> updateProductById(@RequestParam String id, @Valid @RequestBody ProductRequestDTO dto) {
-		ProdutcResponseDTO produtcResponseDTO = productService.updateProductById(id, dto);
+	public ResponseEntity<ProductResponseDTO> updateProductById(@RequestParam String id, @Valid @RequestBody ProductRequestDTO dto) {
+		ProductResponseDTO produtcResponseDTO = productService.updateProductById(id, dto);
 		return ResponseEntity.status(HttpStatus.OK).body(produtcResponseDTO);
 	}
 
 	@GetMapping(value = "/list-products")
-	public ResponseEntity<Page<ProdutcResponseDTO>> listProducts(Pageable pageable) {
-		Page<ProdutcResponseDTO> page = productService.listProducts(pageable);
+	public ResponseEntity<Page<ProductResponseDTO>> listProducts(Pageable pageable) {
+		Page<ProductResponseDTO> page = productService.listProducts(pageable);
 		return ResponseEntity.status(HttpStatus.OK).body(page);
 	}
 }

@@ -6,7 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import com.super_mercado.backend.dtos.requests.ProductRequestDTO;
-import com.super_mercado.backend.dtos.responses.ProdutcResponseDTO;
+import com.super_mercado.backend.dtos.responses.ProductResponseDTO;
 import com.super_mercado.backend.entities.Product;
 import com.super_mercado.backend.mappers.ProductMapper;
 
@@ -26,8 +26,8 @@ public class ProductMapperImpl implements ProductMapper {
 		return product;
 	}
 
-	public ProdutcResponseDTO toProdutcResponseDTO(Product product) {
-		ProdutcResponseDTO dto = new ProdutcResponseDTO();
+	public ProductResponseDTO toProdutcResponseDTO(Product product) {
+		ProductResponseDTO dto = new ProductResponseDTO();
 		BeanUtils.copyProperties(product, dto);
 		return dto;
 	}

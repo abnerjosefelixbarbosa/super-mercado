@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.super_mercado.backend.dtos.requests.ProductRequestDTO;
-import com.super_mercado.backend.dtos.responses.ProdutcResponseDTO;
+import com.super_mercado.backend.dtos.responses.ProductResponseDTO;
 import com.super_mercado.backend.entities.Product;
 import com.super_mercado.backend.mappers.ProductMapper;
 import com.super_mercado.backend.repositories.ProductRepository;
@@ -27,27 +27,27 @@ public class ProductServiceImpl implements ProductService {
 	private ProductValidation productValidation;
 
 	@Transactional
-	public ProdutcResponseDTO registerProduct(ProductRequestDTO dto) {
+	public ProductResponseDTO registerProduct(ProductRequestDTO dto) {
 		Product product = productMapper.toProduct(dto);
 		productValidation.validateProduct(product);
 		Product productSaved = productRepository.save(product);
-		ProdutcResponseDTO produtcResponseDTO = productMapper.toProdutcResponseDTO(productSaved);
+		ProductResponseDTO produtcResponseDTO = productMapper.toProdutcResponseDTO(productSaved);
 		return produtcResponseDTO;
 	}
 
 	@Transactional
-	public ProdutcResponseDTO updateProductById(String id, ProductRequestDTO dto) {
+	public ProductResponseDTO updateProductById(String id, ProductRequestDTO dto) {
 		Product product = productMapper.toProduct(id, dto);
 		productValidation.validateProduct(id, product);
 		Product productFound = productRepository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("ID não encontrado."));
 		BeanUtils.copyProperties(product, productFound);
 		Product productSaved = productRepository.save(productFound);
-		ProdutcResponseDTO produtcResponseDTO = productMapper.toProdutcResponseDTO(productSaved);
+		ProductResponseDTO produtcResponseDTO = productMapper.toProdutcResponseDTO(productSaved);
 		return produtcResponseDTO;
 	}
 
-	public Page<ProdutcResponseDTO> listProducts(Pageable pageable) {
+	public Page<ProductResponseDTO> listProducts(Pageable pageable) {
 		Page<Product> page = productRepository.findAll(pageable);
 		return page.map(productMapper::toProdutcResponseDTO);
 	}
