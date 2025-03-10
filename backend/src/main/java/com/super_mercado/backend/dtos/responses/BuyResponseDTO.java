@@ -18,5 +18,5 @@ public class BuyResponseDTO {
 	private LocalTime time;
 	private String customerDocument;
 	private BigDecimal value;
-	private List<ProductResponseDTO> dtos;
+	private List<BuyProductResponseDTO> buyProductResponseDTOs;
 }

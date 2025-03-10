@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -23,7 +24,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "buys")
 public class Buy implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private String id;
 	@Column(name = "buy_date", nullable = true)
@@ -34,6 +35,6 @@ public class Buy implements Serializable {
 	private String customerDocument;
 	@Column(name = "buy_value", nullable = true, precision = 10, scale = 2)
 	private BigDecimal value;
-	@OneToMany(mappedBy = "buy", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "buy", cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
 	private List<BuyProduct> buyProducts;
 }

@@ -60,7 +60,6 @@ class BuyControllerTI {
 		dtos.add(productRequestDTO1);
 		dtos.add(productRequestDTO2);
 		BuyRequestDTO dto = new BuyRequestDTO();
-		dto.setDtos(dtos);
 		String json = objectMapper.writeValueAsString(dto);
 		mockMvc.perform(post("/api/v1/buys/register-buy").contentType(MediaType.APPLICATION_JSON).content(json))
 				.andExpect(MockMvcResultMatchers.status().isCreated()).andDo(print());
