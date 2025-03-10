@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.super_mercado.backend.dtos.requests.BuyProductRequestDTO;
 import com.super_mercado.backend.dtos.requests.BuyRequestDTO;
 import com.super_mercado.backend.dtos.requests.ProductRequestDTO;
 import com.super_mercado.backend.entities.Product;
@@ -52,15 +53,28 @@ class BuyControllerTI {
 	@Test
 	void sholdRegisterBuyAndReturn201() throws Exception {
 		load();
+		
 		ProductRequestDTO productRequestDTO1 = new ProductRequestDTO();
 		productRequestDTO1.setBarcode("1");
 		ProductRequestDTO productRequestDTO2 = new ProductRequestDTO();
 		productRequestDTO2.setBarcode("2");
-		List<ProductRequestDTO> dtos = new ArrayList<ProductRequestDTO>();
-		dtos.add(productRequestDTO1);
-		dtos.add(productRequestDTO2);
-		BuyRequestDTO dto = new BuyRequestDTO();
-		String json = objectMapper.writeValueAsString(dto);
+		
+		BuyProductRequestDTO buyProductRequestDTO1 = new BuyProductRequestDTO();
+		buyProductRequestDTO1.setProductRequestDTO(productRequestDTO1);
+		buyProductRequestDTO1.setAmount(1);
+		BuyProductRequestDTO buyProductRequestDTO2 = new BuyProductRequestDTO();
+		buyProductRequestDTO2.setProductRequestDTO(productRequestDTO2);
+		buyProductRequestDTO2.setAmount(1);
+		
+		List<BuyProductRequestDTO> buyProductRequestDTOs = new ArrayList<BuyProductRequestDTO>();
+		buyProductRequestDTOs.add(buyProductRequestDTO1);
+		buyProductRequestDTOs.add(buyProductRequestDTO2);
+		
+		BuyRequestDTO buyRequestDTO = new BuyRequestDTO();
+		buyRequestDTO.setBuyProductRequestDTOs(buyProductRequestDTOs);
+	
+		String json = objectMapper.writeValueAsString(buyRequestDTO);
+		
 		mockMvc.perform(post("/api/v1/buys/register-buy").contentType(MediaType.APPLICATION_JSON).content(json))
 				.andExpect(MockMvcResultMatchers.status().isCreated()).andDo(print());
 	}
