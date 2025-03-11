@@ -22,7 +22,7 @@ public class BuyProduct implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
-	private BuyProductId buyProductId;
+	private BuyProductId id;
 	@MapsId("buyId")
 	@ManyToOne
 	@JoinColumn(name = "buy_id")

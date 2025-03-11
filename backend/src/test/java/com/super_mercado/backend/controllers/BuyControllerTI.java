@@ -22,7 +22,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.super_mercado.backend.dtos.requests.BuyProductRequestDTO;
 import com.super_mercado.backend.dtos.requests.BuyRequestDTO;
-import com.super_mercado.backend.dtos.requests.ProductRequestDTO;
+import com.super_mercado.backend.entities.Buy;
+import com.super_mercado.backend.entities.BuyProduct;
 import com.super_mercado.backend.entities.Product;
 import com.super_mercado.backend.repositories.BuyRepository;
 import com.super_mercado.backend.repositories.ProductRepository;
@@ -54,25 +55,22 @@ class BuyControllerTI {
 	void sholdRegisterBuyAndReturn201() throws Exception {
 		load();
 		
-		ProductRequestDTO productRequestDTO1 = new ProductRequestDTO();
-		productRequestDTO1.setBarcode("1");
-		ProductRequestDTO productRequestDTO2 = new ProductRequestDTO();
-		productRequestDTO2.setBarcode("2");
-		
-		BuyProductRequestDTO buyProductRequestDTO1 = new BuyProductRequestDTO();
-		buyProductRequestDTO1.setProductRequestDTO(productRequestDTO1);
-		buyProductRequestDTO1.setAmount(1);
-		BuyProductRequestDTO buyProductRequestDTO2 = new BuyProductRequestDTO();
-		buyProductRequestDTO2.setProductRequestDTO(productRequestDTO2);
-		buyProductRequestDTO2.setAmount(1);
-		
-		List<BuyProductRequestDTO> buyProductRequestDTOs = new ArrayList<BuyProductRequestDTO>();
-		buyProductRequestDTOs.add(buyProductRequestDTO1);
-		buyProductRequestDTOs.add(buyProductRequestDTO2);
-		
 		BuyRequestDTO buyRequestDTO = new BuyRequestDTO();
-		buyRequestDTO.setBuyProductRequestDTOs(buyProductRequestDTOs);
-	
+		
+		Buy buy1 = new Buy();
+		buy1.setCustomerDocument(buyRequestDTO.getCustomerDocment());
+		
+		Product product1 = new Product();
+		product1.setBarcode("1");
+		product1.setDescription("descrição1");
+		product1.setPrice(BigDecimal.valueOf(9.90));
+		
+		BuyProduct buyProduct1 = new BuyProduct();
+		buyProduct1.setAmount(1);
+		buyProduct1.setProduct(product1);
+		
+		buyRequestDTO.setBuyProducts(List.of(buyProduct1));
+		
 		String json = objectMapper.writeValueAsString(buyRequestDTO);
 		
 		mockMvc.perform(post("/api/v1/buys/register-buy").contentType(MediaType.APPLICATION_JSON).content(json))

@@ -9,7 +9,6 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -35,6 +34,6 @@ public class Buy implements Serializable {
 	private String customerDocument;
 	@Column(name = "buy_value", nullable = true, precision = 10, scale = 2)
 	private BigDecimal value;
-	@OneToMany(mappedBy = "buy", cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "buy", cascade = CascadeType.ALL)
 	private List<BuyProduct> buyProducts;
 }
