@@ -17,7 +17,7 @@ public class ProductValidationImpl implements ProductValidation {
 
 		if (isBarcodeExists)
 			throw new RuntimeException("Codigo de barra não deve ser repetido.");
-		if (product.getPrice().precision() != 2)
+		if (product.getPrice().scale() != 2)
 			throw new RuntimeException("Preço deve ter 2 dígitos de escala.");
 	}
 
@@ -28,7 +28,7 @@ public class ProductValidationImpl implements ProductValidation {
         	throw new RuntimeException("ID não deve ser vázio");
 		if (isBarcodeExists)
 			throw new RuntimeException("Codigo de barra não deve ser repetido.");
-		if (product.getPrice().precision() != 2)
+		if (product.getPrice().scale() != 2)
 			throw new RuntimeException("Preço deve ter 2 dígitos de escala.");	
 	}
 }

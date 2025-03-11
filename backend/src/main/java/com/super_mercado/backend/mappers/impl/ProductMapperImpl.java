@@ -15,14 +15,20 @@ public class ProductMapperImpl implements ProductMapper {
 	public Product toProduct(ProductRequestDTO dto) {
 		Product product = new Product();
 		product.setId(UUID.randomUUID().toString());
-		BeanUtils.copyProperties(dto, product);
+		product.setBarcode(dto.getBarcode());
+		product.setDescription(dto.getDescription());
+		product.setPrice(dto.getPrice());
+		
 		return product;
 	}
 	
 	public Product toProduct(String id, ProductRequestDTO dto) {
 		Product product = new Product();
-		product.setId(id);
-		BeanUtils.copyProperties(dto, product);
+		product.setId(UUID.randomUUID().toString());
+		product.setBarcode(dto.getBarcode());
+		product.setDescription(dto.getDescription());
+		product.setPrice(dto.getPrice());
+		
 		return product;
 	}
 

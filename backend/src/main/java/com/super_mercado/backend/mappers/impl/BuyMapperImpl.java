@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import com.super_mercado.backend.dtos.requests.BuyRequestDTO;
@@ -24,14 +25,19 @@ public class BuyMapperImpl implements BuyMapper {
 		buy.setDate(LocalDate.now());
 		buy.setTime(LocalTime.now());
 		buy.setValue(BigDecimal.ZERO);
-		buy.setBuyProducts(dto.getBuyProducts());
+		
 		return buy;
 	}
 
 	public BuyResponseDTO toBuyResponseDTO(Buy buy) {
 		BuyResponseDTO buyResponseDTO = new BuyResponseDTO();
+		BeanUtils.copyProperties(buy, buyResponseDTO);
+		
+		ProductResponseDTO productResponseDTO = new ProductResponseDTO();
+		
 		List<ProductResponseDTO> productResponseDTOs = new ArrayList<ProductResponseDTO>();
 		buyResponseDTO.setProductResponseDTOs(productResponseDTOs);
+		
 		return buyResponseDTO;
 	}
 }

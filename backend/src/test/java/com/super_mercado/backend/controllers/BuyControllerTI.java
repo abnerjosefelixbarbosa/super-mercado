@@ -4,7 +4,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,10 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.super_mercado.backend.dtos.requests.BuyProductRequestDTO;
+import com.super_mercado.backend.dtos.lists.ProductListDTO;
 import com.super_mercado.backend.dtos.requests.BuyRequestDTO;
-import com.super_mercado.backend.entities.Buy;
-import com.super_mercado.backend.entities.BuyProduct;
 import com.super_mercado.backend.entities.Product;
 import com.super_mercado.backend.repositories.BuyRepository;
 import com.super_mercado.backend.repositories.ProductRepository;
@@ -55,21 +52,15 @@ class BuyControllerTI {
 	void sholdRegisterBuyAndReturn201() throws Exception {
 		load();
 		
+		ProductListDTO productListDTO1 = new ProductListDTO();
+		productListDTO1.setBarcode("1");
+		productListDTO1.setAmount(1);
+		ProductListDTO productListDTO2 = new ProductListDTO();
+		productListDTO2.setBarcode("2");
+		productListDTO2.setAmount(1);
+		
 		BuyRequestDTO buyRequestDTO = new BuyRequestDTO();
-		
-		Buy buy1 = new Buy();
-		buy1.setCustomerDocument(buyRequestDTO.getCustomerDocment());
-		
-		Product product1 = new Product();
-		product1.setBarcode("1");
-		product1.setDescription("descrição1");
-		product1.setPrice(BigDecimal.valueOf(9.90));
-		
-		BuyProduct buyProduct1 = new BuyProduct();
-		buyProduct1.setAmount(1);
-		buyProduct1.setProduct(product1);
-		
-		buyRequestDTO.setBuyProducts(List.of(buyProduct1));
+		buyRequestDTO.setProductListDTOs(List.of(productListDTO1, productListDTO2));
 		
 		String json = objectMapper.writeValueAsString(buyRequestDTO);
 		
@@ -83,11 +74,13 @@ class BuyControllerTI {
 		product1.setBarcode("1");
 		product1.setDescription("descrição1");
 		product1.setPrice(BigDecimal.valueOf(9.90));
+		
 		Product product2 = new Product();
 		product2.setId(UUID.randomUUID().toString());
 		product2.setBarcode("2");
 		product2.setDescription("descrição2");
 		product2.setPrice(BigDecimal.valueOf(9.90));
+		
 		productRepository.save(product1);
 		productRepository.save(product2);
 	}
