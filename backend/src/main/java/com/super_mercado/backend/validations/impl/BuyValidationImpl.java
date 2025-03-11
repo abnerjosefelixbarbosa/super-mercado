@@ -16,8 +16,8 @@ public class BuyValidationImpl implements BuyValidation {
 	
 	public void validateBuy(List<BuyProductRequestDTO> buyProductRequestDTOs) {
 		buyProductRequestDTOs.forEach((i) -> {
-			boolean isExists = productRepository.existsByBarcode(i.getBarcode());
-			if (!isExists)
+			//boolean isExists = productRepository.existsByBarcode(i.getBarcode());
+			//if (!isExists)
 				throw new RuntimeException("Produto deve existir.");
 		});
 	}

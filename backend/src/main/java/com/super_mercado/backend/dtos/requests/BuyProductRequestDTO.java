@@ -1,5 +1,7 @@
 package com.super_mercado.backend.dtos.requests;
 
+import com.super_mercado.backend.entities.BuyProductId;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BuyProductRequestDTO {
-	private String barcode;
+	private BuyProductId id;
+	private BuyRequestDTO buyRequestDTO;
+	private ProductRequestDTO productRequestDTO;
 	private Integer amount;
 }
