@@ -15,5 +15,5 @@ import lombok.NoArgsConstructor;
 public class BuyRequestDTO {
 	@Size(max = 20, message = "Documento do cliente deve ter até 20 caracteres.")
 	private String customerDocment;
-	private List<BuyProductRequestDTO> buyProductRequestDTOs;
+	private List<ProductListDTO> productListDTOs;
 }

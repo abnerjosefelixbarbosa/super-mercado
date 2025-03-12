@@ -17,6 +17,7 @@ import com.super_mercado.backend.mappers.BuyMapper;
 import com.super_mercado.backend.repositories.BuyRepository;
 import com.super_mercado.backend.repositories.ProductRepository;
 import com.super_mercado.backend.services.BuyService;
+import com.super_mercado.backend.validations.BuyValidation;
 
 import jakarta.transaction.Transactional;
 
@@ -28,39 +29,30 @@ public class BuyServiceImpl implements BuyService {
 	private BuyRepository buyRepository;
 	@Autowired
 	private ProductRepository productRepository;
+	@Autowired
+	private BuyValidation buyValidation;
 
 	@Transactional
 	public BuyResponseDTO registerBuy(BuyRequestDTO dto) {
 		Buy buy = buyMapper.toBuy(dto);
-		
+		buyValidation.validateBuy(buy);
 		Double total = buy.getBuyProducts().stream()
 		.mapToDouble((i) -> {
 			Product productFound = productRepository.findByBarcode(i.getProduct().getBarcode()).get();
-	
 			return productFound.getPrice().doubleValue() * i.getAmount();
 		})
 		.sum();
-		
-		
+		List<BuyProduct> buyProducts = new ArrayList<BuyProduct>();
 		buy.getBuyProducts().stream()
 		.forEach((i) -> {
 			Product product = productRepository.findByBarcode(i.getProduct().getBarcode()).get();
-			
-			BuyProduct buyProduct = new BuyProduct();
-			buyProduct.setId(new BuyProductId(buy.getId(), product.getId()));
-			buyProduct.setBuy(buy);
-			buyProduct.setAmount(i.getAmount());
-			buyProduct.setProduct(product);
-			
-			List<BuyProduct> buyProducts = new ArrayList<BuyProduct>();
-			buyProducts.add(buyProduct);
-			
-			buy.setBuyProducts(buyProducts);
+			BuyProductId id = new BuyProductId(buy.getId(), product.getId());
 			buy.setValue(BigDecimal.valueOf(total));
-			
+			BuyProduct buyProduct = new BuyProduct(id, buy, product, i.getAmount());
+			buyProducts.add(buyProduct);
+			buy.setBuyProducts(buyProducts);
 			buyRepository.save(buy);
 		});
-		
 		return buyMapper.toBuyResponseDTO(buy);
 	}
 }

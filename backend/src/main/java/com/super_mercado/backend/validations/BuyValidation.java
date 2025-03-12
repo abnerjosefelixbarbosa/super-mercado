@@ -1,9 +1,7 @@
 package com.super_mercado.backend.validations;
 
-import java.util.List;
-
-import com.super_mercado.backend.dtos.requests.BuyProductRequestDTO;
+import com.super_mercado.backend.entities.Buy;
 
 public interface BuyValidation {
-	void validateBuy(List<BuyProductRequestDTO> buyProductRequestDTOs);
+	void validateBuy(Buy buy);
 }

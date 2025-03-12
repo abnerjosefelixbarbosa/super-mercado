@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor	
 public class BuyProductResponseDTO {
-	private BuyProductId buyProductId;
+	private BuyProductId id;
 	private BuyResponseDTO buy;
 	private ProductResponseDTO product;
 	private Integer amount;

@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.super_mercado.backend.dtos.lists.ProductListDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,5 +23,5 @@ public class BuyResponseDTO {
 	private LocalTime time;
 	private String customerDocument;
 	private BigDecimal value;
-	private List<BuyProductResponseDTO> buyProductResponseDTOs; 
+	private List<ProductListDTO> productListDTOs; 
 }

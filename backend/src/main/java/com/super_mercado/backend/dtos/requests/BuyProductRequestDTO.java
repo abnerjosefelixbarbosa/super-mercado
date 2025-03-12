@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BuyProductRequestDTO {
 	private BuyProductId id;
-	private BuyRequestDTO buyRequestDTO;
-	private ProductRequestDTO productRequestDTO;
+	private BuyRequestDTO buy;
+	private ProductRequestDTO product;
 	private Integer amount;
 }
