@@ -49,7 +49,7 @@ class ProductControllerTI {
 	@Test
 	void sholdRegisterProductAndReturn201() throws Exception {
 		load();
-		ProductRequestDTO productRequestDTO = new ProductRequestDTO("2", "descrição1", BigDecimal.valueOf(9.90));
+		ProductRequestDTO productRequestDTO = new ProductRequestDTO("2", "descrição1", new BigDecimal("9.90"));
 		String json = objectMapper.writeValueAsString(productRequestDTO);
 		mockMvc.perform(post("/api/v1/products/register-product").contentType(MediaType.APPLICATION_JSON).content(json))
 				.andExpect(MockMvcResultMatchers.status().isCreated()).andDo(print());
@@ -58,7 +58,7 @@ class ProductControllerTI {
 	@Test
 	void sholdUpdateProductByIdAndReturn200() throws Exception {
 		load();
-		ProductRequestDTO productRequestDTO = new ProductRequestDTO("2", "descrição1", BigDecimal.valueOf(9.90));
+		ProductRequestDTO productRequestDTO = new ProductRequestDTO("2", "descrição1", new BigDecimal("9.90"));
 		String json = objectMapper.writeValueAsString(productRequestDTO);
 		mockMvc.perform(put("/api/v1/products/update-product-by-id").queryParam("id", id)
 				.contentType(MediaType.APPLICATION_JSON).content(json)).andExpect(MockMvcResultMatchers.status().isOk())
@@ -73,7 +73,7 @@ class ProductControllerTI {
 	}
 
 	void load() {
-		Product product1 = new Product(UUID.randomUUID().toString(), "1", "descrição1", BigDecimal.valueOf(9.90), null);
+		Product product1 = new Product(UUID.randomUUID().toString(), "1", "descrição1", new BigDecimal("9.90"), null);
 		productRepository.save(product1);
 		id = product1.getId();
 	}
