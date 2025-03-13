@@ -23,7 +23,7 @@ public class ProductMapperImpl implements ProductMapper {
 	}
 
 	public ProductResponseDTO toProdutcResponseDTO(Product product) {
-		ProductResponseDTO productResponseDTO = new ProductResponseDTO(null, product.getBarcode(),
+		ProductResponseDTO productResponseDTO = new ProductResponseDTO(product.getId(), product.getBarcode(),
 				product.getDescription(), product.getPrice());
 		return productResponseDTO;
 	}

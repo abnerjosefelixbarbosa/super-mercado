@@ -55,6 +55,7 @@ public class ProductServiceImpl implements ProductService {
 	public ProductResponseDTO searchProductByBarcode(String barcode) {
 		Product product = productRepository.findByBarcode(barcode)
 				.orElseThrow(() -> new EntityNotFoundException("Produto não encontrado."));
+		product.setId(null);
 		ProductResponseDTO productResponseDTO = productMapper.toProdutcResponseDTO(product);
 		return productResponseDTO;
 	}

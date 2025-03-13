@@ -15,6 +15,8 @@ public class BuyValidationImpl implements BuyValidation {
 	public void validateBuy(Buy buy) {
 		buy.getBuyProducts().forEach((i) -> {
 			String barcode = i.getProduct().getBarcode();
+			if (barcode.isEmpty() || barcode.equals(null))
+				throw new RuntimeException("Codigo de barra do produto não deve ser vazio ou nulo.");
 			boolean isExists = productRepository.existsByBarcode(barcode);
 			if (!isExists)
 				throw new RuntimeException("Produto deve existir.");
