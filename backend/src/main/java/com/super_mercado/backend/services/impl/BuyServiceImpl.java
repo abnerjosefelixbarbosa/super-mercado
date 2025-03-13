@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import com.super_mercado.backend.dtos.requests.BuyRequestDTO;
 import com.super_mercado.backend.dtos.responses.BuyResponseDTO;
 import com.super_mercado.backend.entities.Buy;
-import com.super_mercado.backend.entities.BuyProductId;
 import com.super_mercado.backend.entities.Item;
+import com.super_mercado.backend.entities.ItemId;
 import com.super_mercado.backend.entities.Product;
 import com.super_mercado.backend.mappers.BuyMapper;
 import com.super_mercado.backend.repositories.BuyRepository;
@@ -46,7 +46,7 @@ public class BuyServiceImpl implements BuyService {
 		buy.getBuyProducts().stream()
 		.forEach((i) -> {
 			Product product = productService.findByBarcode(i.getProduct().getBarcode());
-			BuyProductId id = new BuyProductId(buy.getId(), product.getId());
+			ItemId id = new ItemId(buy.getId(), product.getId());
 			buy.setValue(BigDecimal.valueOf(total));
 			Item buyProduct = new Item(id, buy, product, i.getAmount());
 			buyProducts.add(buyProduct);
