@@ -6,6 +6,8 @@ Sistema de automação de compras.
 
 ## Modelo
 
+![Image](https://github.com/user-attachments/assets/82c99321-02c1-432c-a613-f29a64bb75ef)
+
 ```mermaid
 classDiagram
     class Buy {
