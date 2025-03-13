@@ -51,4 +51,11 @@ public class ProductServiceImpl implements ProductService {
 		Page<Product> page = productRepository.findAll(pageable);
 		return page.map(productMapper::toProdutcResponseDTO);
 	}
+
+	public ProductResponseDTO searchProductByBarcode(String barcode) {
+		Product product = productRepository.findByBarcode(barcode)
+				.orElseThrow(() -> new EntityNotFoundException("Produto não encontrado."));
+		ProductResponseDTO productResponseDTO = productMapper.toProdutcResponseDTO(product);
+		return productResponseDTO;
+	}
 }

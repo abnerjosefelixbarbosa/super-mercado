@@ -42,4 +42,10 @@ public class ProductController {
 		Page<ProductResponseDTO> page = productService.listProducts(pageable);
 		return ResponseEntity.status(HttpStatus.OK).body(page);
 	}
+	
+	@GetMapping(value = "/search-product-by-barcode")
+	public ResponseEntity<ProductResponseDTO> searchProductByBarcode(@RequestParam String barcode) {
+		ProductResponseDTO productResponseDTO = productService.searchProductByBarcode(barcode);
+		return ResponseEntity.status(HttpStatus.OK).body(productResponseDTO);
+	}
 }

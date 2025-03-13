@@ -35,6 +35,7 @@ class ProductControllerTI {
 	@Autowired
 	private ProductRepository productRepository;
 	private String id;
+	private String barcode;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -72,9 +73,17 @@ class ProductControllerTI {
 				.andDo(print());
 	}
 
+	@Test
+	void sholdSearchProductByBarcodeAndReturn200() throws Exception {
+		load();
+		mockMvc.perform(get("/api/v1/products/search-product-by-barcode").queryParam("barcode", barcode))
+				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(print());
+	}
+
 	void load() {
 		Product product1 = new Product(UUID.randomUUID().toString(), "1", "descrição1", new BigDecimal("9.90"), null);
 		productRepository.save(product1);
 		id = product1.getId();
+		barcode = product1.getBarcode();
 	}
 }

@@ -10,4 +10,5 @@ public interface ProductService {
 	ProductResponseDTO registerProduct(ProductRequestDTO dto);
 	ProductResponseDTO updateProductById(String id, ProductRequestDTO dto);
 	Page<ProductResponseDTO> listProducts(Pageable pageable);
+	ProductResponseDTO searchProductByBarcode(String barcode); 
 }
