@@ -17,8 +17,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "buys_products")
-public class BuyProduct implements Serializable {
+@Table(name = "items")
+public class Item implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId

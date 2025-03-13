@@ -3,10 +3,9 @@ package com.super_mercado.backend.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.super_mercado.backend.entities.BuyProduct;
 import com.super_mercado.backend.entities.BuyProductId;
+import com.super_mercado.backend.entities.Item;
 
 @Repository
-public interface BuyProductRepository extends JpaRepository<BuyProduct, BuyProductId> {
-
+public interface ItemRepository extends JpaRepository<Item, BuyProductId> {
 }

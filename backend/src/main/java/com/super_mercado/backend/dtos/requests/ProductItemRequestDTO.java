@@ -1,4 +1,4 @@
-package com.super_mercado.backend.dtos.lists;
+package com.super_mercado.backend.dtos.requests;
 
 import java.math.BigDecimal;
 
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductListDTO {
+public class ProductItemRequestDTO {
 	private String barcode; 
 	private String description;
 	private BigDecimal price;

@@ -8,32 +8,32 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
-import com.super_mercado.backend.dtos.lists.ProductListDTO;
 import com.super_mercado.backend.dtos.requests.BuyRequestDTO;
+import com.super_mercado.backend.dtos.requests.ProductItemRequestDTO;
 import com.super_mercado.backend.dtos.responses.BuyResponseDTO;
 import com.super_mercado.backend.entities.Buy;
-import com.super_mercado.backend.entities.BuyProduct;
+import com.super_mercado.backend.entities.Item;
 import com.super_mercado.backend.entities.Product;
 import com.super_mercado.backend.mappers.BuyMapper;
 
 @Component
 public class BuyMapperImpl implements BuyMapper {
 	public Buy toBuy(BuyRequestDTO dto) {
-		List<BuyProduct> buyProducts = dto.getProductListDTOs().stream().map((i) -> {
+		List<Item> items = dto.getProductItemRequestDTOs().stream().map((i) -> {
 			Product product = new Product(null, i.getBarcode(), null, null, null);
-			BuyProduct buyProduct = new BuyProduct(null, null, product, i.getAmount());
-			return buyProduct;
+			Item item = new Item(null, null, product, i.getAmount());
+			return item;
 		}).toList();
 		Buy buy = new Buy(UUID.randomUUID().toString(), LocalDate.now(), LocalTime.now(), dto.getCustomerDocment(),
-				BigDecimal.ZERO, buyProducts);
+				BigDecimal.ZERO, items);
 		return buy;
 	}
 
 	public BuyResponseDTO toBuyResponseDTO(Buy buy) {
-		List<ProductListDTO> productListDTOs = buy.getBuyProducts().stream().map((i) -> {
-			ProductListDTO productListDTO = new ProductListDTO(i.getProduct().getBarcode(),
+		List<ProductItemRequestDTO> productListDTOs = buy.getBuyProducts().stream().map((i) -> {
+			ProductItemRequestDTO productItemRequestDTO = new ProductItemRequestDTO(i.getProduct().getBarcode(),
 					i.getProduct().getDescription(), i.getProduct().getPrice(), i.getAmount());
-			return productListDTO;
+			return productItemRequestDTO;
 		}).toList();
 		BuyResponseDTO buyResponseDTO = new BuyResponseDTO(buy.getId(), buy.getDate(), buy.getTime(),
 				buy.getCustomerDocument(), buy.getValue(), productListDTOs);

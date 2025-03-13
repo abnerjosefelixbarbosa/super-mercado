@@ -14,7 +14,6 @@ public class ProductValidationImpl implements ProductValidation {
 
 	public void validateProduct(Product product) {
 		boolean isBarcodeExists = productRepository.existsByBarcode(product.getBarcode());
-
 		if (isBarcodeExists)
 			throw new RuntimeException("Codigo de barra não deve ser repetido.");
 		if (product.getPrice().scale() != 2)
@@ -23,7 +22,6 @@ public class ProductValidationImpl implements ProductValidation {
 
 	public void validateProduct(String id, Product product) {
         boolean isBarcodeExists = productRepository.existsByBarcode(product.getBarcode());
-		
         if (id.isEmpty())
         	throw new RuntimeException("ID não deve ser vázio");
 		if (isBarcodeExists)

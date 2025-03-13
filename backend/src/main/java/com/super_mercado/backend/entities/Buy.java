@@ -35,5 +35,5 @@ public class Buy implements Serializable {
 	@Column(name = "buy_value", nullable = true, precision = 10, scale = 2)
 	private BigDecimal value;
 	@OneToMany(mappedBy = "buy", cascade = CascadeType.ALL)
-	private List<BuyProduct> buyProducts;
+	private List<Item> buyProducts;
 }

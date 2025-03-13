@@ -2,8 +2,6 @@ package com.super_mercado.backend.dtos.requests;
 
 import java.util.List;
 
-import com.super_mercado.backend.dtos.lists.ProductListDTO;
-
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -17,5 +15,5 @@ public class BuyRequestDTO {
 	@Size(max = 20, message = "Documento do cliente deve ter até 20 caracteres.")
 	private String customerDocment;
 	@NotNull(message = "Lista de produtos não deve ser nula.")
-	private List<ProductListDTO> productListDTOs;
+	private List<ProductItemRequestDTO> productItemRequestDTOs;
 }

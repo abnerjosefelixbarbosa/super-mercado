@@ -19,8 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.super_mercado.backend.dtos.lists.ProductListDTO;
 import com.super_mercado.backend.dtos.requests.BuyRequestDTO;
+import com.super_mercado.backend.dtos.requests.ProductItemRequestDTO;
 import com.super_mercado.backend.entities.Product;
 import com.super_mercado.backend.repositories.BuyRepository;
 import com.super_mercado.backend.repositories.ProductRepository;
@@ -51,9 +51,9 @@ class BuyControllerTI {
 	@Test
 	void sholdRegisterBuyAndReturn201() throws Exception {
 		load();
-		ProductListDTO product1 = new ProductListDTO("1", null, null, 1);
-		ProductListDTO product2 = new ProductListDTO("2", null, null, 1);
-		BuyRequestDTO buyRequestDTO = new BuyRequestDTO(null, List.of(product1, product2));
+		ProductItemRequestDTO productItemRequestDTO1 = new ProductItemRequestDTO("1", null, null, 1);
+		ProductItemRequestDTO productItemRequestDTO2 = new ProductItemRequestDTO("2", null, null, 1);
+		BuyRequestDTO buyRequestDTO = new BuyRequestDTO(null, List.of(productItemRequestDTO1, productItemRequestDTO2));
 		String json = objectMapper.writeValueAsString(buyRequestDTO);
 		mockMvc.perform(post("/api/v1/buys/register-buy").contentType(MediaType.APPLICATION_JSON).content(json))
 				.andExpect(MockMvcResultMatchers.status().isCreated()).andDo(print());
