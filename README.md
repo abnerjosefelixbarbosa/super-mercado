@@ -8,7 +8,7 @@ Sistema de automação de compras.
 
 ![Image](https://github.com/user-attachments/assets/5151d80a-1b9e-4128-a7a3-1ee42753b30e)
 
-# Recursos do Projeto
+# Recursos Do Projeto
 
 ## Backend
 
