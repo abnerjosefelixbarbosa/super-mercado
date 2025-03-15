@@ -12,8 +12,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,10 +26,8 @@ public class Buy implements Serializable {
 
 	@Id
 	private String id;
-	@Temporal(TemporalType.DATE)
 	@Column(name = "buy_date", nullable = true)
 	private LocalDate date;
-	@Temporal(TemporalType.TIME)
 	@Column(name = "buy_time", nullable = true)
 	private LocalTime time;
 	@Column(length = 20)
