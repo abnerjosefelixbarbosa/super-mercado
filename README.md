@@ -103,7 +103,7 @@ POST
 # Execução Do Projeto
 
 - Copie e execute repositório em uma IDE.
-- Acesse [a docmentação da API](http://localhost:8080/swagger-ui/index.html) ou use outra plataforma para testa a API.
+- Teste em uma outra plataforma ou na API em produção no [link](https://super-mercado-production.up.railway.app/swagger-ui/index.html). 
 
 ```bash
 # clone repository
