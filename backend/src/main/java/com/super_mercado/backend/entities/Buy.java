@@ -2,8 +2,6 @@ package com.super_mercado.backend.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -26,10 +24,10 @@ public class Buy implements Serializable {
 
 	@Id
 	private String id;
-	@Column(name = "buy_date", nullable = true)
-	private LocalDate date;
-	@Column(name = "buy_time", nullable = true)
-	private LocalTime time;
+	@Column(name = "buy_date", length = 20, nullable = true)
+	private String date;
+	@Column(name = "buy_time", length = 20, nullable = true)
+	private String time;
 	@Column(length = 20)
 	private String customerDocument;
 	@Column(name = "buy_value", nullable = true, precision = 10, scale = 2)

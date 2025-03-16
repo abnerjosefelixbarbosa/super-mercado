@@ -3,6 +3,7 @@ package com.super_mercado.backend.mappers.impl;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,7 +25,9 @@ public class BuyMapperImpl implements BuyMapper {
 			Item item = new Item(null, null, product, i.getAmount());
 			return item;
 		}).toList();
-		Buy buy = new Buy(UUID.randomUUID().toString(), LocalDate.now(), LocalTime.now(), dto.getCustomerDocment(),
+		LocalTime time = LocalTime.now();
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+		Buy buy = new Buy(UUID.randomUUID().toString(), LocalDate.now().toString(), time.format(dateTimeFormatter), dto.getCustomerDocment(),
 				BigDecimal.ZERO, items);
 		return buy;
 	}
@@ -35,7 +38,7 @@ public class BuyMapperImpl implements BuyMapper {
 					i.getProduct().getDescription(), i.getProduct().getPrice(), i.getAmount());
 			return productItemRequestDTO;
 		}).toList();
-		BuyResponseDTO buyResponseDTO = new BuyResponseDTO(buy.getId(), buy.getDate(), buy.getTime(),
+		BuyResponseDTO buyResponseDTO = new BuyResponseDTO(buy.getId(), LocalDate.parse(buy.getDate()), LocalTime.parse(buy.getTime()),
 				buy.getCustomerDocument(), buy.getValue(), productListDTOs);
 		return buyResponseDTO;
 	}
