@@ -19,7 +19,7 @@ public class BuyResponseDTO {
 	private String id;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate date;
-	@JsonFormat(pattern = "HH:mm:ss")
+	@JsonFormat(pattern = "HH:mm")
 	private LocalTime time;
 	private String customerDocument;
 	private BigDecimal value;

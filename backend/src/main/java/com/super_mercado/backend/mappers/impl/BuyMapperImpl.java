@@ -28,8 +28,7 @@ public class BuyMapperImpl implements BuyMapper {
 		LocalTime time = LocalTime.now();
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 		String timeFormatter = time.format(dateTimeFormatter);
-		//time = LocalTime.parse(timeFormatter);
-		Buy buy = new Buy(UUID.randomUUID().toString(), LocalDate.now(), LocalTime.parse(timeFormatter), dto.getCustomerDocment(),
+		Buy buy = new Buy(UUID.randomUUID().toString(), LocalDate.now(), LocalTime.now(), dto.getCustomerDocment(),
 				BigDecimal.ZERO, items);
 		return buy;
 	}
